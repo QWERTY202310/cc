@@ -21,14 +21,28 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
         }
         header img {
             height: 50px;
-            margin-right: 20px;
+            margin-bottom: 20px;
         }
         header h1 {
             margin: 0;
             font-size: 2em;
+        }
+        nav {
+            margin: 20px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #4CAF50;
         }
         main {
             padding: 20px;
@@ -76,20 +90,24 @@
     <header>
         <img src="logo.png" alt="水伊布伺服器 Logo">
         <h1>歡迎來到水伊布伺服器</h1>
+        <nav>
+            <a href="index.html">首頁</a>
+            <a href="chat.html">AI 聊天</a>
+        </nav>
     </header>
     <main>
         <div class="server-info">
             <h2>Java 版伺服器資訊</h2>
-            <p>IP地址: d813b23.icehost.xyz</p>
-            <p>版本: 1.20.1~1.20.6</p>
+            <p>IP地址: your.java.server.ip</p>
+            <p>版本: 1.16.5</p>
         </div>
         <div class="server-info">
             <h2>基岩版伺服器資訊</h2>
-            <p>IP地址: bedrock.icehost.xyz</p>
-            <p>端口: 10007</p>
-            <p>版本: 1.20以上</p>
+            <p>IP地址: your.bedrock.server.ip</p>
+            <p>端口: your.bedrock.server.port</p>
+            <p>版本: 1.16.5</p>
         </div>
-        <button class="status-button" onclick="window.location.href='https://status.0mine0.cloudns.be/status/minecraft';">查看狀態</button>
+        <button class="status-button" onclick="window.location.href='your-uptime-kuma-status-url';">查看狀態</button>
     </main>
     <footer>
         <p class="footer-content">© 2024 水伊布伺服器</p>
