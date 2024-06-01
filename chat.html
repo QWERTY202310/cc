@@ -50,10 +50,47 @@
             margin: auto;
             text-align: center;
         }
-        iframe {
-            width: 100%;
-            height: 600px;
+        #chat-container {
+            background-color: rgba(60, 60, 60, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            height: 70vh;
+            overflow-y: auto;
+        }
+        .message {
+            margin: 10px 0;
+        }
+        .message.user {
+            text-align: right;
+        }
+        .message.bot {
+            text-align: left;
+        }
+        #input-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        #user-input {
+            width: 70%;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
             border: none;
+        }
+        #send-button {
+            padding: 10px 20px;
+            font-size: 1em;
+            margin-left: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #send-button:hover {
+            background-color: #45a049;
         }
         footer {
             background-color: rgba(60, 60, 60, 0.7);
@@ -78,10 +115,41 @@
         </nav>
     </header>
     <main>
-        <iframe src="https://gemini.google.com/app" title="AI Chat"></iframe>
+        <div id="chat-container"></div>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="輸入訊息...">
+            <button id="send-button">發送</button>
+        </div>
     </main>
     <footer>
         <p class="footer-content">© 2024 水伊布伺服器</p>
     </footer>
+    <script>
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+
+        async function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (!userInput) return;
+
+            appendMessage('user', userInput);
+            document.getElementById('user-input').value = '';
+
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userInput })
+            });
+            const data = await response.json();
+            appendMessage('bot', data.reply);
+        }
+
+        function appendMessage(sender, text) {
+            const messageContainer = document.createElement('div');
+            messageContainer.classList.add('message', sender);
+            messageContainer.innerText = text;
+            document.getElementById('chat-container').appendChild(messageContainer);
+            messageContainer.scrollIntoView();
+        }
+    </script>
 </body>
 </html>
