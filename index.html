@@ -7,13 +7,16 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e1e;
             color: #ffffff;
             margin: 0;
             padding: 0;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
         header {
-            background-color: #3c3c3c;
+            background-color: rgba(60, 60, 60, 0.7);
             padding: 20px;
             display: flex;
             align-items: center;
@@ -33,6 +36,12 @@
             margin: auto;
             text-align: center;
         }
+        .server-info {
+            margin-bottom: 40px;
+            background-color: rgba(60, 60, 60, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
         .status-button {
             background-color: #4CAF50;
             border: none;
@@ -51,7 +60,7 @@
             background-color: #45a049;
         }
         footer {
-            background-color: #3c3c3c;
+            background-color: rgba(60, 60, 60, 0.7);
             padding: 10px;
             text-align: center;
             position: fixed;
@@ -69,12 +78,18 @@
         <h1>歡迎來到水伊布伺服器</h1>
     </header>
     <main>
-        <h2>伺服器資訊</h2>
-        <p>IP地址: your.server.ip</p>
-        <p>版本: 1.16.5</p>
-        <p>歡迎所有玩家加入我們的社區！</p>
-        <h2>伺服器狀態</h2>
-        <button class="status-button" onclick="window.location.href='your-uptime-kuma-status-url';">查看伺服器狀態</button>
+        <div class="server-info">
+            <h2>Java 版伺服器資訊</h2>
+            <p>IP地址: your.java.server.ip</p>
+            <p>版本: 1.16.5</p>
+        </div>
+        <div class="server-info">
+            <h2>基岩版伺服器資訊</h2>
+            <p>IP地址: your.bedrock.server.ip</p>
+            <p>端口: your.bedrock.server.port</p>
+            <p>版本: 1.16.5</p>
+        </div>
+        <button class="status-button" onclick="window.location.href='your-uptime-kuma-status-url';">查看狀態</button>
     </main>
     <footer>
         <p class="footer-content">© 2024 水伊布伺服器</p>
