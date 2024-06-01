@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>水伊布伺服器</title>
+    <meta name="description" content="歡迎來到水伊布伺服器。">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,13 +15,14 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            overflow: auto; /* 允許滾動 */
         }
         header {
             background-color: rgba(60, 60, 60, 0.7);
             padding: 20px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
         }
         header img {
             height: 50px;
@@ -29,6 +31,24 @@
         header h1 {
             margin: 0;
             font-size: 2em;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .discord-button {
+            background-color: #7289da;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .discord-button:hover {
+            background-color: #5b6eae;
         }
         main {
             padding: 20px;
@@ -76,6 +96,7 @@
     <header>
         <img src="logo.png" alt="水伊布伺服器 Logo">
         <h1>歡迎來到水伊布伺服器</h1>
+        <button class="discord-button" onclick="window.location.href='https://discord.com/invite/4gw9Z2k3tM';">加入我們的 Discord</button>
     </header>
     <main>
         <div class="server-info">
@@ -88,12 +109,12 @@
             <p>IP地址: bedrock.icehost.xyz</p>
             <p>端口: 10007</p>
             <p>版本: 1.20以上</p>
-            <button class="status-button" onclick="window.location.href='https://status.0mine0.cloudns.be/status/minecraft';">查看狀態</button>
+            <button class="status-button" onclick="window.location.href='https://status.0mine0.cloudns.be/status/minecraft';" aria-label="查看基岩版伺服器狀態">查看狀態</button>
         </div>
         <div class="server-info">
             <h2>聯絡我們</h2>
-             <button class="status-button" onclick="window.location.href='mailto:zzzz105137@gmail.com';">主要</button>
-             <button class="status-button" onclick="window.location.href='mailto:admin@0mine0.cloudns.be';">備用</button>
+            <button class="status-button" onclick="window.location.href='mailto:zzzz105137@gmail.com';" aria-label="發送郵件至主要聯絡信箱">主要</button>
+            <button class="status-button" onclick="window.location.href='mailto:admin@0mine0.cloudns.be';" aria-label="發送郵件至備用聯絡信箱">備用</button>
         </div>
     </main>
     <footer>
