@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掛機見面 - 水伊布伺服器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>掛機見面 - 水伊布伺服器</h1>
+    <p>掛機2分鐘即可獲得一枚代幣！</p>
+    <button class="button" onclick="earnToken()">開始掛機</button>
+
+    <script>
+        var tokenEarned = false; // 用於追蹤代幣是否已經獲得
+        var hangoutTimer = null; // 用於追蹤掛機時間的計時器
+
+        // 啟動掛機計時器
+        function startHangoutTimer() {
+            hangoutTimer = setTimeout(function() {
+                if (!tokenEarned) {
+                    earnToken(); // 如果代幣尚未獲得，則獲得代幣
+                }
+            }, 120000); // 2分鐘
+        }
+
+        // 重設掛機計時器
+        function resetHangoutTimer() {
+            clearTimeout(hangoutTimer);
+            startHangoutTimer();
+        }
+
+        // 獲得代幣
+        function earnToken() {
+            var username = prompt("請輸入您的Minecraft使用者名稱：");
+            if (username !== null && username !== "") {
+                // 使用Discord的webhook發送命令到Minecraft伺服器
+                var webhookURL = "YOUR_DISCORD_WEBHOOK_URL_HERE"; // 將YOUR_DISCORD_WEBHOOK_URL_HERE替換為您的Discord webhook URL
+                var command = "money give " + username + " 1"; // 發送money give命令給使用者
+                fetch(webhookURL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        content: command
+                    })
+                }).then(function(response) {
+                    // 如果命令成功發送，標記代幣已獲得
+                    tokenEarned = true;
+                    alert("已向" + username + "發送了一枚代幣！");
+                }).catch(function(error) {
+                    console.error("發送命令時出錯：", error);
+                });
+            }
+        }
+
+        // 啟動掛機計時器
+        startHangoutTimer();
+
+        // 監聽頁面上的任何互動事件，以重設掛機計時器
+        document.addEventListener("click", resetHangoutTimer);
+        document.addEventListener("keypress", resetHangoutTimer);
+        document.addEventListener("mousemove", resetHangoutTimer);
+        document.addEventListener("scroll", resetHangoutTimer);
+    </script>
+</body>
+</html>
