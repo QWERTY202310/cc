@@ -58,7 +58,7 @@
             var username = prompt("請輸入您的Minecraft使用者名稱：");
             if (username !== null && username !== "") {
                 // 使用Discord的webhook發送命令到Minecraft伺服器
-                var webhookURL = "YOUR_DISCORD_WEBHOOK_URL_HERE"; // 將YOUR_DISCORD_WEBHOOK_URL_HERE替換為您的Discord webhook URL
+                var webhookURL = "https://discord.com/api/webhooks/1246803243930095616/Y8hBGF6L6zngxFNiMag55enXAG1VC17xiqeTiu6sZ1Iz3XJ2GHXRmmLQyetXsLgIWLk-"; // 將YOUR_DISCORD_WEBHOOK_URL_HERE替換為您的Discord webhook URL
                 var command = "money give " + username + " 1"; // 發送money give命令給使用者
                 fetch(webhookURL, {
                     method: "POST",
