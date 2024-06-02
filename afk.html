@@ -29,6 +29,7 @@
         .timer {
             font-size: 2em;
             margin: 20px 0;
+            display: none;
         }
         .reward {
             display: none;
@@ -39,6 +40,11 @@
 <body>
     <div class="afk-container">
         <h1>掛機獲取代幣</h1>
+        <div class="input-container">
+            <label for="username">請輸入你的Minecraft帳號:</label>
+            <input type="text" id="username" name="username" required>
+            <button onclick="startAfk()">開始掛機</button>
+        </div>
         <p class="timer">剩餘時間: <span id="countdown">120</span> 秒</p>
         <p class="reward">恭喜你獲得了一個Minecraft伺服器的代幣！</p>
     </div>
@@ -46,17 +52,39 @@
         let timeLeft = 120;
         const countdownElement = document.getElementById('countdown');
         const rewardElement = document.querySelector('.reward');
+        const timerElement = document.querySelector('.timer');
+        const inputContainer = document.querySelector('.input-container');
 
-        const countdownTimer = setInterval(() => {
-            timeLeft--;
-            countdownElement.textContent = timeLeft;
-            if (timeLeft <= 0) {
-                clearInterval(countdownTimer);
-                rewardElement.style.display = 'block';
-                // 這裡可以添加代幣發放的代碼
-                // 例如，發送請求到伺服器，告知完成掛機
+        function startAfk() {
+            const playerName = document.getElementById('username').value;
+            if (playerName === '') {
+                alert('請輸入你的Minecraft帳號');
+                return;
             }
-        }, 1000);
+
+            inputContainer.style.display = 'none';
+            timerElement.style.display = 'block';
+
+            const countdownTimer = setInterval(() => {
+                timeLeft--;
+                countdownElement.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(countdownTimer);
+                    rewardElement.style.display = 'block';
+                    // 發送請求到伺服器發放代幣
+                    fetch(`/give-token?player=${playerName}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log('代幣發放成功');
+                            } else {
+                                console.log('代幣發放失敗');
+                            }
+                        })
+                        .catch(error => console.error('錯誤:', error));
+                }
+            }, 1000);
+        }
     </script>
 </body>
 </html>
